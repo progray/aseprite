@@ -6,9 +6,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
-        build_type: [RelWithDebInfo, Debug]
-        enable_ui: [off]
+        os: [windows-latest, ubuntu-latest]
+        build_type: [RelWithDebInfo, Debug,Release]
+        enable_ui: [on]
         include:
           - os: ubuntu-latest
             build_type: Debug
@@ -74,3 +74,9 @@ jobs:
         git clone --branch $TESTS_BRANCH --recursive https://github.com/aseprite/tests.git
         cd tests
         $XVFB bash run-tests.sh
+    - uses: actions/upload-artifact@v3
+      with:
+        name: aseprite
+        path: |
+          D:/a/aseprite/aseprite/build/bin/data
+          D:/a/aseprite/aseprite/build/bin/aseprite.exe        
